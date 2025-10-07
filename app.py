@@ -84,4 +84,4 @@ if __name__ == '__main__':
             admin.set_password('securepassword123')
             db.session.add(admin)
             db.session.commit()
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='127.0.0.1', port=5000)
