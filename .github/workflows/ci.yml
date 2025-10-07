@@ -28,14 +28,10 @@ jobs:
           pip install bandit
           bandit -r . -f json -o bandit-report.json || echo "Bandit completed with warnings"
 
-      - name: Run OWASP Dependency-Check (SCA)
-        uses: dependency-check/Dependency-Check_Action@main
-        with:
-          project: 'test'
-          path: '.'
-          format: 'JSON'
-          out: dependency-check-report.json
-          args: '--enableExperimental --python --scan .'
+      - name: Run pip-audit (SCA for Python)
+        run: |
+          pip install pip-audit
+          pip-audit --requirement requirements.txt --json > dependency-check-report.json
 
       - name: Upload Bandit report
         if: always()
@@ -44,7 +40,7 @@ jobs:
           name: bandit-report
           path: bandit-report.json
 
-      - name: Upload OWASP Dependency-Check report
+      - name: Upload pip audit report
         if: always()
         uses: actions/upload-artifact@v4
         with:
