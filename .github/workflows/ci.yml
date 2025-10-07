@@ -28,13 +28,11 @@ jobs:
           pip install bandit
           bandit -r . -f json -o bandit-report.json || echo "Bandit completed with warnings"
 
-      - name: Run OWASP Dependency-Check (SCA)
-        uses: dependency-check/Dependency-Check_Action@main
-        with:
-          project: 'test'
-          path: '.'
-          format: 'JSON'
-          out: dependency-check-report.json
+      - name: Run Safety (SCA)
+        run: |
+          # Использую check, т.к. scan требует авторизацию
+          pip install safety
+          safety check --json > safety-report.json || echo "Safety check completed with issues"
 
       - name: Upload Bandit report
         if: always()
@@ -47,5 +45,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: dependency-check-report
-          path: dependency-check-report.json
+          name: safety-report
+          path: safety-report.json
