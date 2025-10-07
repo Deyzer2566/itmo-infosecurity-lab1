@@ -31,6 +31,7 @@ jobs:
       - name: Run OWASP Dependency-Check (SCA)
         uses: dependency-check/Dependency-Check_Action@main
         with:
+          project: 'test'
           args: --scan . --format JSON --out dependency-check-report.json --disableYarnAudit --disableNodeAudit --disableRetireJS
 
       - name: Upload Bandit report
