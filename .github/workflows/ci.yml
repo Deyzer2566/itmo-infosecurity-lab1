@@ -30,8 +30,9 @@ jobs:
 
       - name: Run Safety (SCA)
         run: |
+          # Использую check, т.к. scan требует авторизацию
           pip install safety
-          safety scan --json --continue-on-error > safety-report.json
+          safety check --json > safety-report.json || echo "Safety check completed with issues"
 
       - name: Upload Bandit report
         if: always()
