@@ -34,18 +34,10 @@
 - **SAST**: `bandit` сканирует код на уязвимости.
 - **SCA**: `safety` проверяет зависимости.
 
-Скриншоты успешных запусков см. ниже.
+### Скриншоты отчётов
 
----
+* **bandit**
+  * ![alt text](image.png)
 
-## Скриншоты отчётов
-
-Пока пусто
-
----
-
-## Запуск локально
-
-```bash
-pip install -r requirements.txt
-python app.py
+* **safety**
+  * ![alt text](image-1.png)
